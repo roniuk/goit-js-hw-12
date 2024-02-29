@@ -26,6 +26,8 @@ const searchParams = {
     q: '',
 };
 
+btnElem.classList.add('hidden');
+
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     searchParams.q = e.target.elements.input.value.trim();
@@ -53,6 +55,8 @@ form.addEventListener('submit', async (e) => {
     const images = await getPhotoByName();
     searchParams.totalResults = images.totalHits;
     createGallery(images);
+
+     btnElem.classList.remove('hidden');
     checkBtnStatus();
     e.target.reset();
 });
