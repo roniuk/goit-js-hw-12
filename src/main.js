@@ -51,6 +51,9 @@ form.addEventListener('submit', async (e) => {
     gallery.innerHTML = '';
     loader.classList.remove('hidden');
 
+    //==========================================================
+
+
     searchParams.page = 1;
     const images = await getPhotoByName();
     searchParams.totalResults = images.totalHits;
@@ -98,7 +101,8 @@ function createGallery(images) {
         });
 
         btnElem.classList.add('hidden');
-    } else {
+        return;
+    }
         const link = images.hits.map(image => `<a class="gallery-link" href="${image.largeImageURL}">
             <img class="gallery-image"
                 src="${image.webformatURL}"
@@ -127,7 +131,6 @@ function createGallery(images) {
             </div>`).join('');
         gallery.insertAdjacentHTML('beforeend', link);
         btnElem.classList.remove('hidden');
-    }
 
     let lightBox = new SimpleLightbox('.gallery-link');
     lightBox.refresh();
