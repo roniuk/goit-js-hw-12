@@ -26,8 +26,6 @@ const searchParams = {
     q: '',
 };
 
-btnElem.classList.add('hidden');
-
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     searchParams.q = e.target.elements.input.value.trim();
@@ -45,21 +43,16 @@ form.addEventListener('submit', async (e) => {
             messageColor: 'white',
             messageSize: '25',
         });
-        return;
+       return;
     }
-
+    
     gallery.innerHTML = '';
     loader.classList.remove('hidden');
-
-    //==========================================================
-
-
+ 
     searchParams.page = 1;
     const images = await getPhotoByName();
     searchParams.totalResults = images.totalHits;
     createGallery(images);
-
-     btnElem.classList.remove('hidden');
     checkBtnStatus();
     e.target.reset();
 });
@@ -101,8 +94,7 @@ function createGallery(images) {
         });
 
         btnElem.classList.add('hidden');
-        return;
-    }
+    } else {
         const link = images.hits.map(image => `<a class="gallery-link" href="${image.largeImageURL}">
             <img class="gallery-image"
                 src="${image.webformatURL}"
@@ -131,7 +123,7 @@ function createGallery(images) {
             </div>`).join('');
         gallery.insertAdjacentHTML('beforeend', link);
         btnElem.classList.remove('hidden');
-
+}
     let lightBox = new SimpleLightbox('.gallery-link');
     lightBox.refresh();
     loader.classList.add('hidden');
