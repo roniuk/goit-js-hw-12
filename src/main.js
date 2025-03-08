@@ -20,7 +20,7 @@ const searchParams = {
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
-    per_page: 15,
+    per_page: 30,
     page: 1,
     totalResults: 0,
     q: '',
